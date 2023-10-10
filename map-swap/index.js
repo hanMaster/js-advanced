@@ -6,6 +6,6 @@ let weatherMap = new Map([
     ['Paris', 14],
 ]);
 
-weatherMap = new Map([...weatherMap.entries()].map(([k, v]) => [v, k]));
+weatherMap = new Map([...weatherMap].map(([k, v]) => [v, k]));
 
 console.log(weatherMap);
