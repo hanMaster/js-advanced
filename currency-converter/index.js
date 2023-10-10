@@ -36,6 +36,8 @@ function convert(amount, from, to) {
             return Intl.NumberFormat('ru-RU', rubOptions).format(
                 amount * eurRate
             );
+        default:
+            return null;
     }
 }
 
