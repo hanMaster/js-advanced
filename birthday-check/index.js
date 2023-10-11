@@ -6,14 +6,14 @@ const user1 = {
 };
 const user2 = {
     name: 'Петя',
-    birthday: '10/11/2023',
+    birthday: '10/11/2003',
 };
 
 const isBirthdayToday = (user) => {
     const now = new Date();
     return (
-        new Date(user.birthday).getTime() ===
-        new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()
+        new Date(user.birthday).getDate() === now.getDate() &&
+        new Date(user.birthday).getMonth() === now.getMonth()
     );
 };
 
