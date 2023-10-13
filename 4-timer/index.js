@@ -2,7 +2,14 @@
 
 const slot = document.getElementById('slot');
 
+let res = [];
+
 const formatter = new Intl.RelativeTimeFormat('ru-RU');
+
+const generateStr = (diff, interval) => {
+    const parts = formatter.formatToParts(diff, interval);
+    res.push(`${parts[1].value}${parts[2].value}`);
+};
 
 const year = new Date().getFullYear();
 const newYear = new Date(year + 1, 0, 1, 0, 0, 0, 0);
@@ -32,27 +39,16 @@ const calcDays = () => {
 };
 
 const setEstimate = () => {
+    res = [];
     const diff = newYear.getTime() - Date.now();
 
-    const diffMonth = 11 - new Date().getMonth();
-    const month = formatter.formatToParts(diffMonth, 'months');
-    slot.innerText = `${month[1].value}${month[2].value},`;
+    generateStr(11 - new Date().getMonth(), 'months');
+    generateStr(calcDays(), 'days');
+    generateStr(Math.floor((diff / 1000 / 60 / 60) % 24), 'hours');
+    generateStr(Math.floor((diff / 1000 / 60) % 60), 'minutes');
+    generateStr(Math.floor((diff / 1000) % 60), 'seconds');
 
-    const diffDays = calcDays();
-    const days = formatter.formatToParts(diffDays, 'days');
-    slot.innerText += ` ${days[1].value}${days[2].value}, `;
-
-    const diffHours = Math.floor((diff / 1000 / 60 / 60) % 24);
-    const hrs = formatter.formatToParts(diffHours, 'hours');
-    slot.innerText += ` ${hrs[1].value}${hrs[2].value}, `;
-
-    const diffMinutes = Math.floor((diff / 1000 / 60) % 60);
-    const min = formatter.formatToParts(diffMinutes, 'minutes');
-    slot.innerText += ` ${min[1].value}${min[2].value}, `;
-
-    const diffSeconds = Math.floor((diff / 1000) % 60);
-    const sec = formatter.formatToParts(diffSeconds, 'seconds');
-    slot.innerText += ` ${sec[1].value}${sec[2].value}`;
+    slot.innerText = res.join(', ');
 };
 
 setEstimate();
