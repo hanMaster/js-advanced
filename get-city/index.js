@@ -9,7 +9,7 @@ function getGeolocation() {
             (pos) => {
                 resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
             },
-            (err) => reject(new Error(err.message))
+            (err) => reject(err)
         );
     });
 }
