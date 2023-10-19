@@ -18,9 +18,13 @@ async function getActivity() {
 async function main() {
     const container = document.querySelector('.activities');
     const activities = await Promise.all([getActivity(), getActivity(), getActivity()]);
+    container.innerHTML = '';
     for (const activity of activities) {
         container.innerHTML += `<div class='card'>${activity}</div>`;
     }
 }
 
 main();
+
+const btn = document.querySelector('.refresh');
+btn.addEventListener('click', main);

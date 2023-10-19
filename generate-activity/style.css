@@ -6,6 +6,10 @@ body {
     text-align: center;
 }
 
+.refresh {
+    margin-top: 50px;
+}
+
 .activities {
     display: flex;
     justify-content: space-between;
