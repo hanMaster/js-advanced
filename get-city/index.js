@@ -3,7 +3,7 @@
 const slot = document.querySelector('span');
 const url = 'https://api.bigdatacloud.net/data/reverse-geocode-client?';
 
-async function getGeolocation() {
+function getGeolocation() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
             (pos) => {
