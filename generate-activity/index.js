@@ -1,0 +1,26 @@
+'use strict';
+
+const url = 'https://www.boredapi.com/api/activity';
+
+async function getActivity() {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(response.status);
+        }
+        const data = await response.json();
+        return data.activity;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function main() {
+    const container = document.querySelector('.activities');
+    const activities = await Promise.all([getActivity(), getActivity(), getActivity()]);
+    for (const activity of activities) {
+        container.innerHTML += `<div class='card'>${activity}</div>`;
+    }
+}
+
+main();
