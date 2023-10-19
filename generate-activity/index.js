@@ -15,8 +15,9 @@ async function getActivity() {
     }
 }
 
+const container = document.querySelector('.activities');
+
 async function main() {
-    const container = document.querySelector('.activities');
     const activities = await Promise.all([getActivity(), getActivity(), getActivity()]);
     container.innerHTML = '';
     for (const activity of activities) {
