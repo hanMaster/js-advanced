@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+}
+
+#counter {
+    padding: 30px 50px;
+    border-radius: 10px;
+    border: 1px solid salmon;
+    display: inline-block;
+    margin-bottom: 20px;
+}
