@@ -9,3 +9,8 @@ body {
     display: inline-block;
     margin-bottom: 20px;
 }
+
+button {
+    border: 1px solid grey;
+    border-radius: 5px;
+}
