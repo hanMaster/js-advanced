@@ -1,0 +1,17 @@
+{
+    "name": "15-build",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "build": "rollup index.js --format umd --name 'myBundle' --file bundle.js",
+        "serve": "live-server --port=8080"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "live-server": "^1.2.2",
+        "rollup": "^4.1.4"
+    }
+}
