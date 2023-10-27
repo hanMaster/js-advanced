@@ -1,3 +1,4 @@
+import onChange from 'on-change';
 import { AbstractView } from '../../common/View.js';
 
 export class MainView extends AbstractView {
@@ -10,8 +11,14 @@ export class MainView extends AbstractView {
 
     constructor(appState) {
         super();
-        this.appState = appState;
+        this.appState = onChange(appState, this.appStateHook.bind(this));
         this.setTitle('Поиск книг');
+    }
+
+    appStateHook(path) {
+        if (path === 'favorites') {
+            this.render();
+        }
     }
 
     render() {
