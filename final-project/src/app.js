@@ -1,5 +1,4 @@
 import { routes } from './routes';
-import './app.css';
 import { NotFoundView } from './views/404/NotFoundView.js';
 
 class App {
