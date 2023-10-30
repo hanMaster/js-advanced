@@ -10,13 +10,20 @@ export class MainView extends AbstractView {
         loading: false,
         searchQuery: undefined,
         offset: 0,
+        numFound: 0,
     };
 
     constructor(appState) {
         super();
-        this.appState = onChange(appState, this.appStateHook.bind(this));
+        this.appState = appState;
+        this.appState = onChange(this.appState, this.appStateHook.bind(this));
         this.state = onChange(this.state, this.stateHook.bind(this));
         this.setTitle('Поиск книг');
+    }
+
+    destroy() {
+        onChange.unsubscribe(this.appState);
+        onChange.unsubscribe(this.state);
     }
 
     appStateHook(path) {
@@ -33,8 +40,8 @@ export class MainView extends AbstractView {
                 this.state.offset
             );
             this.state.list = data.docs;
+            this.state.numFound = data.numFound;
             this.state.loading = false;
-            console.log(this.state.list);
         }
         if (path === 'loading') {
             this.render();

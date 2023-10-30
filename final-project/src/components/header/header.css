@@ -20,6 +20,7 @@
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    color: var(--black);
 }
 
 .menu__item:visited {
