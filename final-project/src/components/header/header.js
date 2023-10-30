@@ -1,6 +1,5 @@
-// import onChange from 'on-change';
 import { DivComponent } from '../../common/DivComponent';
-import './header.css';
+import './Header.css';
 
 export class Header extends DivComponent {
     constructor(appState) {
@@ -9,7 +8,6 @@ export class Header extends DivComponent {
     }
 
     build() {
-        this.el.innerHTML = '';
         this.el.classList.add('header');
         this.el.innerHTML = `
         <div>
