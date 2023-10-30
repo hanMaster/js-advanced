@@ -2,8 +2,7 @@ import onChange from 'on-change';
 import { AbstractView } from '../../common/View.js';
 import { Header } from '../../components/header/Header.js';
 import { Search } from '../../components/search/Search.js';
-import { Spinner } from '../../components/spinner/Spinner.js';
-import './MainView.css';
+import { CardList } from '../../components/card-list/CardList.js';
 
 export class MainView extends AbstractView {
     state = {
@@ -45,13 +44,7 @@ export class MainView extends AbstractView {
     render() {
         const main = document.createElement('div');
         main.append(new Search(this.state).build());
-        if (this.state.loading) {
-            main.append(new Spinner().build());
-        }
-        const searchResult = document.createElement('h2');
-        searchResult.classList.add('search-result');
-        searchResult.innerHTML = `Найдено книг - ${this.state.list.length}`;
-        main.append(searchResult);
+        main.append(new CardList(this.appState, this.state).build());
         this.app.innerHTML = '';
         this.renderHeader();
         this.app.append(main);
