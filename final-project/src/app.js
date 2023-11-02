@@ -1,0 +1,25 @@
+import { routes } from './routes';
+import { NotFoundView } from './views/404/NotFoundView.js';
+
+class App {
+    appState = {
+        favorites: [],
+    };
+
+    constructor() {
+        window.addEventListener('hashchange', this.route.bind(this));
+        this.route();
+    }
+
+    route() {
+        if (this.currentView) {
+            this.currentView.destroy();
+        }
+        const route = routes.find((r) => r.path === location.hash);
+        const view = route ? route.view : NotFoundView;
+        this.currentView = new view(this.appState);
+        this.currentView.render();
+    }
+}
+
+new App();
