@@ -1,10 +1,9 @@
 import onChange from 'on-change';
 import { AbstractView } from '../../common/View.js';
 import { Header } from '../../components/header/Header.js';
-import { Search } from '../../components/search/Search.js';
-import { CardList } from '../../components/card-list/CardList.js';
+import { Card } from '../../components/card/Card.js';
 
-export class favoritesView extends AbstractView {
+export class FavoritesView extends AbstractView {
     constructor(appState) {
         super();
         this.appState = appState;
@@ -14,16 +13,32 @@ export class favoritesView extends AbstractView {
 
     destroy() {
         onChange.unsubscribe(this.appState);
-        onChange.unsubscribe(this.state);
+    }
+
+    appStateHook(path) {
+        if (path === 'favorites') {
+            this.render();
+        }
     }
 
     render() {
-        const main = document.createElement('div');
-        main.append(new Search(this.state).build());
-        main.append(new CardList(this.appState, this.state).build());
+        const favorites = document.createElement('div');
+        const title = document.createElement('div');
+        title.classList.add('page-title');
+        const searchResult = document.createElement('h2');
+        searchResult.innerHTML = 'Избранные книги';
+        title.append(searchResult);
+        favorites.append(title);
         this.app.innerHTML = '';
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('cards-wrapper');
+        for (const item of this.appState.favorites) {
+            wrapper.append(new Card(this.appState, item).build());
+        }
+
+        favorites.append(wrapper);
         this.renderHeader();
-        this.app.append(main);
+        this.app.append(favorites);
     }
 
     renderHeader() {

@@ -3,6 +3,7 @@ import { AbstractView } from '../../common/View.js';
 import { Header } from '../../components/header/Header.js';
 import { Search } from '../../components/search/Search.js';
 import { CardList } from '../../components/card-list/CardList.js';
+import { SearchResult } from '../../components/search-result/SearchResult.js';
 
 export class MainView extends AbstractView {
     state = {
@@ -35,10 +36,7 @@ export class MainView extends AbstractView {
     async stateHook(path) {
         if (path === 'searchQuery') {
             this.state.loading = true;
-            const data = await this.loadList(
-                this.state.searchQuery,
-                this.state.offset
-            );
+            const data = await this.loadList(this.state.searchQuery, this.state.offset);
             this.state.list = data.docs;
             this.state.numFound = data.numFound;
             this.state.loading = false;
@@ -51,6 +49,7 @@ export class MainView extends AbstractView {
     render() {
         const main = document.createElement('div');
         main.append(new Search(this.state).build());
+        main.append(new SearchResult(this.state).build());
         main.append(new CardList(this.appState, this.state).build());
         this.app.innerHTML = '';
         this.renderHeader();
@@ -63,9 +62,7 @@ export class MainView extends AbstractView {
     }
 
     async loadList(q, offset) {
-        const res = await fetch(
-            `https://openlibrary.org/search.json?q=${q}&offset=${offset}`
-        );
+        const res = await fetch(`https://openlibrary.org/search.json?q=${q}&offset=${offset}`);
         return res.json();
     }
 }

@@ -13,43 +13,29 @@ export class Card extends DivComponent {
     }
 
     removeFromFavorites() {
-        const idx = this.appState.favorites.findIndex(
-            (b) => b.key === this.cardState.key
-        );
+        const idx = this.appState.favorites.findIndex((b) => b.key === this.cardState.key);
         this.appState.favorites.splice(idx, 1);
     }
 
     build() {
         this.el.classList.add('card');
-        const existInFavorites = this.appState.favorites.find(
-            (b) => b.key == this.cardState.key
-        );
+        const existInFavorites = this.appState.favorites.find((b) => b.key == this.cardState.key);
 
         this.el.innerHTML = `
         <div class="card__image">
-            <img src="https://covers.openlibrary.org/b/olid/${
-                this.cardState.cover_edition_key
-            }-M.jpg"
+            <img src="https://covers.openlibrary.org/b/olid/${this.cardState.cover_edition_key}-M.jpg"
             alt="Обложка" />
         </div>
         <div class="card__info">
             <span class="card__tag">
-                ${
-                    this.cardState.subject
-                        ? this.cardState.subject[0]
-                        : 'Не задано'
-                }
+                ${this.cardState.subject ? this.cardState.subject[0] : 'Не задано'}
             </span>
             <span class="card__title">${this.cardState.title}</span>
             <span class="card__author">${
-                this.cardState.author_name
-                    ? this.cardState.author_name[0]
-                    : 'Не задано'
+                this.cardState.author_name ? this.cardState.author_name[0] : 'Не задано'
             }</span>
             <div class="card__footer">
-            <button class="button__add ${
-                existInFavorites ? 'button__active' : ''
-            }">
+            <button class="button__add ${existInFavorites ? 'button__active' : ''}">
             
             ${
                 existInFavorites

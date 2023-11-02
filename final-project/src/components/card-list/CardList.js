@@ -16,10 +16,6 @@ export class CardList extends DivComponent {
             this.el.append(new Spinner().build());
             return this.el;
         }
-        const searchResult = document.createElement('h2');
-        searchResult.classList.add('search-result');
-        searchResult.innerHTML = `Найдено книг - ${this.parentState.numFound}`;
-        this.el.append(searchResult);
         const wrapper = document.createElement('div');
         wrapper.classList.add('cards-wrapper');
         for (const item of this.parentState.list) {
